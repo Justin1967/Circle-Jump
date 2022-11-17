@@ -5,7 +5,10 @@ public class JumperScript : MonoBehaviour
     //Reference CircleScript
     private CircleScript circleScript;
 
-    //Reference Orbit Position
+    //Reference Orbit
+    private Transform orbit;
+
+    //Reference OrbitPositon
     private Transform orbitPosition;
 
     //Jumper speed
@@ -57,16 +60,19 @@ public class JumperScript : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Circle"))
         {
+            //Get reference Orbit of the Circle
+            orbit = other.gameObject.transform.GetChild(0);
             //Get reference OrbitPosition of the Circle
-            orbitPosition = other.gameObject.transform.GetChild(0).transform.GetChild(0);
+            orbitPosition = orbit.transform.GetChild(0);
 
             hasJumped = false;
             hasLanded = true;
 
             //Set the OrbitPosition to the point where the Jumper landed
-
-
-
+            //Calculate direction = destination - source
+            Vector3 direction = transform.position - orbit.position;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
+            orbit.eulerAngles = Vector3.forward * angle;
         }
     }
 }
