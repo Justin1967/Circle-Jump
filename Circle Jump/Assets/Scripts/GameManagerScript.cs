@@ -76,6 +76,8 @@ public class GameManagerScript : MonoBehaviour
         jumperSpriteRenderer.color = ColorManagerScript.instance.jumperColor[indexColor];
 
         //Change Trail color
+        TrailRenderer jumperTrailRenderer = GameObject.FindGameObjectWithTag("Jumper").GetComponent<TrailRenderer>();
+        jumperTrailRenderer.material.color = ColorManagerScript.instance.trailColor[GameManagerScript.instance.indexColor];
 
         //Change Effect color
         GameObject circleExpand1 = Resources.Load("Single Expand") as GameObject;

@@ -159,7 +159,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 811dc98d2ac214446ac252759b0efa91, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -210,7 +210,7 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0, g: 1, b: 0.08628178, a: 1}
+      key0: {r: 1, g: 1, b: 1, a: 1}
       key1: {r: 1, g: 1, b: 1, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
@@ -261,5 +261,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5947ed6cf85f254ca7f9a55155faf5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  circleExpand1: {fileID: 8934638988670152372, guid: aa8df85bbd7de504ea981117ea2ef9c2, type: 3}
-  circleExpand2: {fileID: 8217463691639062321, guid: f58d36159f7635a48a011cb89e9a7f03, type: 3}

@@ -23,7 +23,13 @@ public class JumperScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        SpriteRenderer jumperSpriteRenderer = GetComponent<SpriteRenderer>();
+        jumperSpriteRenderer.color = ColorManagerScript.instance.jumperColor[GameManagerScript.instance.indexColor];
+
         circleScript = GameObject.FindGameObjectWithTag("Circle").GetComponent<CircleScript>();
+
+        TrailRenderer jumperTrailRenderer = GetComponent<TrailRenderer>();
+        jumperTrailRenderer.material.color = ColorManagerScript.instance.trailColor[GameManagerScript.instance.indexColor];
     }
 
     // Update is called once per frame
@@ -67,28 +73,7 @@ public class JumperScript : MonoBehaviour
         //Execute if Jumper hits the Circle
         else if (other.gameObject.CompareTag("Circle"))
         {
-            //Get reference Circle Sprite
-            SpriteRenderer circleSpriteRenderer = other.gameObject.GetComponent<SpriteRenderer>();
-
-            if (circleSpriteRenderer.sprite.name == "Single")
-            {
-                //Reference Circle Expand1
-                GameObject circleExpand1 = Resources.Load("Single Expand") as GameObject;
-                SpriteRenderer circleExpand1SpriteRenderer = circleExpand1.GetComponent<SpriteRenderer>();
-                circleExpand1SpriteRenderer.sharedMaterial.color = ColorManagerScript.instance.circleColor[GameManagerScript.instance.indexColor];
-
-                Instantiate(circleExpand1, new Vector3(other.gameObject.transform.position.x, other.gameObject.transform.position.y, other.gameObject.transform.position.z), Quaternion.identity);
-            }
-
-            if (circleSpriteRenderer.sprite.name == "Double")
-            {
-                //Reference Circle Expand2
-                GameObject circleExpand2 = Resources.Load("Double Expand") as GameObject;
-                SpriteRenderer circleExpand2SpriteRenderer = circleExpand2.GetComponent<SpriteRenderer>();
-                circleExpand2SpriteRenderer.sharedMaterial.color = ColorManagerScript.instance.circleColor[GameManagerScript.instance.indexColor];
-
-                Instantiate(circleExpand2, new Vector3(other.gameObject.transform.position.x, other.gameObject.transform.position.y, other.gameObject.transform.position.z), Quaternion.identity);
-            }
+            CreateCircleEffect(other);
 
             //Get reference Orbit of the Circle
             orbit = other.gameObject.transform.GetChild(0);
@@ -114,6 +99,32 @@ public class JumperScript : MonoBehaviour
 
             //Instantiate a new Circle
             GameManagerScript.instance.CreateCircle();
+        }
+    }
+
+    private void CreateCircleEffect(Collider2D other)
+    {
+        //Get reference Circle Sprite
+        SpriteRenderer circleSpriteRenderer = other.gameObject.GetComponent<SpriteRenderer>();
+
+        if (circleSpriteRenderer.sprite.name == "Single")
+        {
+            //Reference Circle Expand1
+            GameObject circleExpand1 = Resources.Load("Single Expand") as GameObject;
+            SpriteRenderer circleExpand1SpriteRenderer = circleExpand1.GetComponent<SpriteRenderer>();
+            circleExpand1SpriteRenderer.sharedMaterial.color = ColorManagerScript.instance.circleColor[GameManagerScript.instance.indexColor];
+
+            Instantiate(circleExpand1, new Vector3(other.gameObject.transform.position.x, other.gameObject.transform.position.y, other.gameObject.transform.position.z), Quaternion.identity);
+        }
+
+        if (circleSpriteRenderer.sprite.name == "Double")
+        {
+            //Reference Circle Expand2
+            GameObject circleExpand2 = Resources.Load("Double Expand") as GameObject;
+            SpriteRenderer circleExpand2SpriteRenderer = circleExpand2.GetComponent<SpriteRenderer>();
+            circleExpand2SpriteRenderer.sharedMaterial.color = ColorManagerScript.instance.circleColor[GameManagerScript.instance.indexColor];
+
+            Instantiate(circleExpand2, new Vector3(other.gameObject.transform.position.x, other.gameObject.transform.position.y, other.gameObject.transform.position.z), Quaternion.identity);
         }
     }
 }

@@ -13,7 +13,7 @@ public class CircleScript : MonoBehaviour
     private Transform orbit;
 
     //Rotation speed Orbit
-    private float rotationSpeed = 150.0f;
+    private float rotationSpeed = 200.0f;
 
     //Rotation direction
     private float rotationDirection;
