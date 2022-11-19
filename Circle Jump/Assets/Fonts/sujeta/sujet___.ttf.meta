@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 8b6c7d4c6a57340419c657f520d56552
+guid: 118b21525018f1b45990d837bf20a826
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Breamcatcher
+  - Sujeta
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
