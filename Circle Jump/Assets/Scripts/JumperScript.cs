@@ -20,6 +20,8 @@ public class JumperScript : MonoBehaviour
     //Variable to check if Jumper has landed on a circle
     private bool hasLanded = false;
 
+    public string expandName;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -91,8 +93,9 @@ public class JumperScript : MonoBehaviour
 
             //Add 1 to score
             GameManagerScript.instance.score += 1;
+            UIManagerScript.instance.scoreText.text = GameManagerScript.instance.score.ToString();
 
-            if (GameManagerScript.instance.score % 3 == 0)
+            if (GameManagerScript.instance.score % 11 == 0)
             {
                 GameManagerScript.instance.levelUp = true;
             }
@@ -109,22 +112,18 @@ public class JumperScript : MonoBehaviour
 
         if (circleSpriteRenderer.sprite.name == "Single")
         {
-            //Reference Circle Expand1
-            GameObject circleExpand1 = Resources.Load("Single Expand") as GameObject;
-            SpriteRenderer circleExpand1SpriteRenderer = circleExpand1.GetComponent<SpriteRenderer>();
-            circleExpand1SpriteRenderer.sharedMaterial.color = ColorManagerScript.instance.circleColor[GameManagerScript.instance.indexColor];
-
-            Instantiate(circleExpand1, new Vector3(other.gameObject.transform.position.x, other.gameObject.transform.position.y, other.gameObject.transform.position.z), Quaternion.identity);
+            expandName = "Single Expand";
         }
-
-        if (circleSpriteRenderer.sprite.name == "Double")
+        else
         {
-            //Reference Circle Expand2
-            GameObject circleExpand2 = Resources.Load("Double Expand") as GameObject;
-            SpriteRenderer circleExpand2SpriteRenderer = circleExpand2.GetComponent<SpriteRenderer>();
-            circleExpand2SpriteRenderer.sharedMaterial.color = ColorManagerScript.instance.circleColor[GameManagerScript.instance.indexColor];
-
-            Instantiate(circleExpand2, new Vector3(other.gameObject.transform.position.x, other.gameObject.transform.position.y, other.gameObject.transform.position.z), Quaternion.identity);
+            expandName = "Double Expand";
         }
+
+        //Reference Circle Expand
+        GameObject circleExpand = Resources.Load(expandName) as GameObject;
+        SpriteRenderer circleExpandSpriteRenderer = circleExpand.GetComponent<SpriteRenderer>();
+        circleExpandSpriteRenderer.sharedMaterial.color = ColorManagerScript.instance.circleColor[GameManagerScript.instance.indexColor];
+
+        Instantiate(circleExpand, new Vector3(other.gameObject.transform.position.x, other.gameObject.transform.position.y, other.gameObject.transform.position.z), Quaternion.identity);
     }
 }
