@@ -86,13 +86,13 @@ public class GameManagerScript : MonoBehaviour
         //Change Effect color
         if (jumperScript.expandName == "Single Expand")
         {
-            GameObject circleExpand = Resources.Load("Single Expand") as GameObject;
+            GameObject circleExpand = Resources.Load(jumperScript.expandName) as GameObject;
             SpriteRenderer circleExpandSpriteRenderer = circleExpand.GetComponent<SpriteRenderer>();
             circleExpandSpriteRenderer.sharedMaterial.color = ColorManagerScript.instance.circleColor[indexColor];
         }
         else if (jumperScript.expandName == "Double Expand")
         {
-            GameObject circleExpand = Resources.Load("Double Expand") as GameObject;
+            GameObject circleExpand = Resources.Load(jumperScript.expandName) as GameObject;
             SpriteRenderer circleExpandSpriteRenderer = circleExpand.GetComponent<SpriteRenderer>();
             circleExpandSpriteRenderer.sharedMaterial.color = ColorManagerScript.instance.circleColor[indexColor];
         }
