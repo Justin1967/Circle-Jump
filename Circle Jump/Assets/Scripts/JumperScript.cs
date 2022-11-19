@@ -26,12 +26,12 @@ public class JumperScript : MonoBehaviour
     void Start()
     {
         SpriteRenderer jumperSpriteRenderer = GetComponent<SpriteRenderer>();
-        jumperSpriteRenderer.color = ColorManagerScript.instance.jumperColor[GameManagerScript.instance.indexColor];
+        jumperSpriteRenderer.sharedMaterial.color = ColorManagerScript.instance.jumperColor[GameManagerScript.instance.indexColor];
 
         circleScript = GameObject.FindGameObjectWithTag("Circle").GetComponent<CircleScript>();
 
         TrailRenderer jumperTrailRenderer = GetComponent<TrailRenderer>();
-        jumperTrailRenderer.material.color = ColorManagerScript.instance.trailColor[GameManagerScript.instance.indexColor];
+        jumperTrailRenderer.sharedMaterial.color = ColorManagerScript.instance.trailColor[GameManagerScript.instance.indexColor];
     }
 
     // Update is called once per frame
@@ -40,6 +40,8 @@ public class JumperScript : MonoBehaviour
         //Jump when SPACE is pressed
         if (Input.GetKeyDown(KeyCode.Space) && !hasJumped)
         {
+            GameManagerScript.instance.levelUp = false;
+
             hasJumped = true;
             hasLanded = false;
         }

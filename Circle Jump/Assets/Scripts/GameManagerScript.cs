@@ -76,7 +76,7 @@ public class GameManagerScript : MonoBehaviour
         }
 
         //Change Jumper color
-        SpriteRenderer jumperSpriteRenderer = GameObject.FindGameObjectWithTag("Jumper").GetComponent<SpriteRenderer>();
+        SpriteRenderer jumperSpriteRenderer = jumperPrefab.GetComponent<SpriteRenderer>();
         jumperSpriteRenderer.color = ColorManagerScript.instance.jumperColor[indexColor];
 
         //Change Trail color
