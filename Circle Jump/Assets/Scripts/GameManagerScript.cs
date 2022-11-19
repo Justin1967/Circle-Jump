@@ -46,27 +46,27 @@ public class GameManagerScript : MonoBehaviour
 
     private void Update()
     {
-        if (score % 11 == 0 && !levelUp)
+        if (levelUp)
         {
-            ChangeColor();
+            levelUp = false;
+            level += 1;
+            indexColor += 1;
+            ChangeCircleColor();
+            ChangeJumperColor();
+            ChangeEffectColor();
         }
     }
 
     //Call this method when Jumper has landed on a Circle
-    public void CreateCircle()
+    public void CreateNewCircle()
     {
         circleY += 6.0f;
         float circleXPosition = Random.Range(circleMaximumX, circleMinimumX);
         Instantiate(circlePrefab, new Vector3(circleXPosition, circleY, transform.position.z), Quaternion.identity);
     }
 
-    public void ChangeColor()
+    public void ChangeCircleColor()
     {
-        levelUp = true;
-        level += 1;
-        indexColor += 1;
-
-        //Change Circle color
         circles = GameObject.FindGameObjectsWithTag("Circle");
 
         foreach (GameObject go in circles)
@@ -74,16 +74,19 @@ public class GameManagerScript : MonoBehaviour
             SpriteRenderer circleSpriteRenderer = go.GetComponent<SpriteRenderer>();
             circleSpriteRenderer.color = ColorManagerScript.instance.circleColor[indexColor];
         }
+    }
 
-        //Change Jumper color
+    public void ChangeJumperColor()
+    {
         SpriteRenderer jumperSpriteRenderer = jumperPrefab.GetComponent<SpriteRenderer>();
         jumperSpriteRenderer.color = ColorManagerScript.instance.jumperColor[indexColor];
 
-        //Change Trail color
         TrailRenderer jumperTrailRenderer = GameObject.FindGameObjectWithTag("Jumper").GetComponent<TrailRenderer>();
         jumperTrailRenderer.material.color = ColorManagerScript.instance.trailColor[indexColor];
+    }
 
-        //Change Effect color
+    public void ChangeEffectColor()
+    {
         if (jumperScript.expandName == "Single Expand")
         {
             GameObject circleExpand = (GameObject)Resources.Load("Single Expand");

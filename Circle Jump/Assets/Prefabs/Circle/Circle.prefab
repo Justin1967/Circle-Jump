@@ -87,7 +87,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a209f942be1a29942b86f6dfddf448d1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -167,7 +167,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 481063ac3fe0b2448ae74ca168509f9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  circleSpriteRenderer: {fileID: 4455839705892523515}
   anim: {fileID: -4800647816250845249}
   orbit: {fileID: 4455839706628572982}
 --- !u!1 &4455839706628572981

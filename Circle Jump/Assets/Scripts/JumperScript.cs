@@ -18,7 +18,7 @@ public class JumperScript : MonoBehaviour
     private bool hasJumped = false;
 
     //Variable to check if Jumper has landed on a circle
-    private bool hasLanded = false;
+    public bool hasLanded = false;
 
     public string expandName;
 
@@ -26,12 +26,12 @@ public class JumperScript : MonoBehaviour
     void Start()
     {
         SpriteRenderer jumperSpriteRenderer = GetComponent<SpriteRenderer>();
-        jumperSpriteRenderer.sharedMaterial.color = ColorManagerScript.instance.jumperColor[GameManagerScript.instance.indexColor];
-
-        circleScript = GameObject.FindGameObjectWithTag("Circle").GetComponent<CircleScript>();
+        jumperSpriteRenderer.color = ColorManagerScript.instance.jumperColor[GameManagerScript.instance.indexColor];
 
         TrailRenderer jumperTrailRenderer = GetComponent<TrailRenderer>();
-        jumperTrailRenderer.sharedMaterial.color = ColorManagerScript.instance.trailColor[GameManagerScript.instance.indexColor];
+        jumperTrailRenderer.material.color = ColorManagerScript.instance.trailColor[GameManagerScript.instance.indexColor];
+
+        circleScript = GameObject.FindGameObjectWithTag("Circle").GetComponent<CircleScript>();
     }
 
     // Update is called once per frame
@@ -40,8 +40,6 @@ public class JumperScript : MonoBehaviour
         //Jump when SPACE is pressed
         if (Input.GetKeyDown(KeyCode.Space) && !hasJumped)
         {
-            GameManagerScript.instance.levelUp = false;
-
             hasJumped = true;
             hasLanded = false;
         }
@@ -98,13 +96,17 @@ public class JumperScript : MonoBehaviour
             orbit.eulerAngles = Vector3.forward * angle;
 
             //Instantiate a new Circle
-            GameManagerScript.instance.CreateCircle();
+            GameManagerScript.instance.CreateNewCircle();
+
+            if (GameManagerScript.instance.score % 2 == 0)
+            {
+                GameManagerScript.instance.levelUp = true;
+            }
         }
     }
 
     private void CreateCircleEffect(Collider2D other)
     {
-        //Get reference Circle Sprite
         SpriteRenderer circleSpriteRenderer = other.gameObject.GetComponent<SpriteRenderer>();
 
         if (circleSpriteRenderer.sprite.name == "Single")
@@ -116,10 +118,9 @@ public class JumperScript : MonoBehaviour
             expandName = "Double Expand";
         }
 
-        //Reference Circle Expand
         GameObject circleExpand = (GameObject)Resources.Load(expandName);
         SpriteRenderer circleExpandSpriteRenderer = circleExpand.GetComponent<SpriteRenderer>();
-        circleExpandSpriteRenderer.sharedMaterial.color = ColorManagerScript.instance.circleColor[GameManagerScript.instance.indexColor];
+        circleExpandSpriteRenderer.color = ColorManagerScript.instance.circleColor[GameManagerScript.instance.indexColor];
 
         Instantiate(circleExpand, new Vector3(other.gameObject.transform.position.x, other.gameObject.transform.position.y, other.gameObject.transform.position.z), Quaternion.identity);
     }

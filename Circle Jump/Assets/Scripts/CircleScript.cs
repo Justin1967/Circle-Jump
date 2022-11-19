@@ -3,9 +3,6 @@ using UnityEngine;
 public class CircleScript : MonoBehaviour
 {
     [SerializeField]
-    private SpriteRenderer circleSpriteRenderer;
-
-    [SerializeField]
     private Animator anim;
 
     //Reference Orbit
@@ -24,6 +21,7 @@ public class CircleScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        SpriteRenderer circleSpriteRenderer = GetComponent<SpriteRenderer>();
         circleSpriteRenderer.color = ColorManagerScript.instance.circleColor[GameManagerScript.instance.indexColor];
         circleSize = Random.Range(0.7f, 1.0f);
         transform.localScale = new Vector3(circleSize, circleSize, 1);
