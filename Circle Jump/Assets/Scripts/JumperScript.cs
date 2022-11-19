@@ -83,7 +83,7 @@ public class JumperScript : MonoBehaviour
 
             GameManagerScript.instance.CreateNewCircle();
 
-            if (GameManagerScript.instance.score % 2 == 0)
+            if (GameManagerScript.instance.score % 11 == 0)
             {
                 GameManagerScript.instance.levelUp = true;
             }
