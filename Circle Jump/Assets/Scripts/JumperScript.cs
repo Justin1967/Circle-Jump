@@ -77,6 +77,7 @@ public class JumperScript : MonoBehaviour
             GameManagerScript.instance.score += 1;
             UIManagerScript.instance.scoreText.text = GameManagerScript.instance.score.ToString();
 
+
             Vector3 direction = transform.position - orbit.position;
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
             orbit.eulerAngles = Vector3.forward * angle;
