@@ -57,7 +57,6 @@ public class GameManagerScript : MonoBehaviour
         }
     }
 
-    //Call this method when Jumper has landed on a Circle
     public void CreateNewCircle()
     {
         circleY += 6.0f;
