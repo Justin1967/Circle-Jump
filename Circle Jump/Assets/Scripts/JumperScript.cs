@@ -85,20 +85,15 @@ public class JumperScript : MonoBehaviour
             hasJumped = false;
             hasLanded = true;
 
+            //Add 1 to score
+            GameManagerScript.instance.score += 1;
+            UIManagerScript.instance.scoreText.text = GameManagerScript.instance.score.ToString();
+
             //Set the OrbitPosition to the point where the Jumper landed
             //Calculate direction = destination - source
             Vector3 direction = transform.position - orbit.position;
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
             orbit.eulerAngles = Vector3.forward * angle;
-
-            //Add 1 to score
-            GameManagerScript.instance.score += 1;
-            UIManagerScript.instance.scoreText.text = GameManagerScript.instance.score.ToString();
-
-            if (GameManagerScript.instance.score % 11 == 0)
-            {
-                GameManagerScript.instance.levelUp = true;
-            }
 
             //Instantiate a new Circle
             GameManagerScript.instance.CreateCircle();
@@ -120,7 +115,7 @@ public class JumperScript : MonoBehaviour
         }
 
         //Reference Circle Expand
-        GameObject circleExpand = Resources.Load(expandName) as GameObject;
+        GameObject circleExpand = (GameObject)Resources.Load(expandName);
         SpriteRenderer circleExpandSpriteRenderer = circleExpand.GetComponent<SpriteRenderer>();
         circleExpandSpriteRenderer.sharedMaterial.color = ColorManagerScript.instance.circleColor[GameManagerScript.instance.indexColor];
 

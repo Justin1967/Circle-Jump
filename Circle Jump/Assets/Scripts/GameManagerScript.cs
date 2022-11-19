@@ -9,7 +9,7 @@ public class GameManagerScript : MonoBehaviour
     private float circleMinimumX = -2.0f;
     private float circleMaximumX = 2.0f;
 
-    public int score = -1;
+    public int score = 0;
     private int best = 0;
     public int level = 1;
     public int indexColor = 0;
@@ -46,11 +46,8 @@ public class GameManagerScript : MonoBehaviour
 
     private void Update()
     {
-        if (levelUp)
+        if (score % 11 == 0 && !levelUp)
         {
-            levelUp = false;
-            level += 1;
-            indexColor += 1;
             ChangeColor();
         }
     }
@@ -58,7 +55,6 @@ public class GameManagerScript : MonoBehaviour
     //Call this method when Jumper has landed on a Circle
     public void CreateCircle()
     {
-        UIManagerScript.instance.scoreText.text = score.ToString();
         circleY += 6.0f;
         float circleXPosition = Random.Range(circleMaximumX, circleMinimumX);
         Instantiate(circlePrefab, new Vector3(circleXPosition, circleY, transform.position.z), Quaternion.identity);
@@ -66,6 +62,10 @@ public class GameManagerScript : MonoBehaviour
 
     public void ChangeColor()
     {
+        levelUp = true;
+        level += 1;
+        indexColor += 1;
+
         //Change Circle color
         circles = GameObject.FindGameObjectsWithTag("Circle");
 
@@ -81,20 +81,20 @@ public class GameManagerScript : MonoBehaviour
 
         //Change Trail color
         TrailRenderer jumperTrailRenderer = GameObject.FindGameObjectWithTag("Jumper").GetComponent<TrailRenderer>();
-        jumperTrailRenderer.material.color = ColorManagerScript.instance.trailColor[GameManagerScript.instance.indexColor];
+        jumperTrailRenderer.material.color = ColorManagerScript.instance.trailColor[indexColor];
 
         //Change Effect color
         if (jumperScript.expandName == "Single Expand")
         {
-            GameObject circleExpand = Resources.Load(jumperScript.expandName) as GameObject;
+            GameObject circleExpand = (GameObject)Resources.Load("Single Expand");
             SpriteRenderer circleExpandSpriteRenderer = circleExpand.GetComponent<SpriteRenderer>();
-            circleExpandSpriteRenderer.sharedMaterial.color = ColorManagerScript.instance.circleColor[indexColor];
+            circleExpandSpriteRenderer.color = ColorManagerScript.instance.circleColor[indexColor];
         }
         else if (jumperScript.expandName == "Double Expand")
         {
-            GameObject circleExpand = Resources.Load(jumperScript.expandName) as GameObject;
+            GameObject circleExpand = (GameObject)Resources.Load("Double Expand");
             SpriteRenderer circleExpandSpriteRenderer = circleExpand.GetComponent<SpriteRenderer>();
-            circleExpandSpriteRenderer.sharedMaterial.color = ColorManagerScript.instance.circleColor[indexColor];
+            circleExpandSpriteRenderer.color = ColorManagerScript.instance.circleColor[indexColor];
         }
     }
 
