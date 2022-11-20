@@ -261,5 +261,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5947ed6cf85f254ca7f9a55155faf5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jumperClip: {fileID: 8300000, guid: 4d310f66205fbf04ba2130e05c28ba0e, type: 3}
+  circleClip: {fileID: 8300000, guid: 325453b468814994d8195f8eade674ca, type: 3}
   hasLanded: 0
   expandName: 

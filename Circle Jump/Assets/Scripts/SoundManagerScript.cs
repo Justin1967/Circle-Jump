@@ -2,15 +2,21 @@ using UnityEngine;
 
 public class SoundManagerScript : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
+    public static SoundManagerScript instance;
 
+    [SerializeField]
+    private AudioSource musicSource, effectsSource;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void PlaySound(AudioClip clip)
     {
-
+        effectsSource.PlayOneShot(clip);
     }
 }

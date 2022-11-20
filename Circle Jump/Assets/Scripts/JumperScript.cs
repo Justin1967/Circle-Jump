@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class JumperScript : MonoBehaviour
 {
+    [SerializeField] private AudioClip jumperClip, circleClip;
+
     private CircleScript circleScript;
 
     private Transform orbit;
@@ -37,6 +39,7 @@ public class JumperScript : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && !hasJumped)
         {
+            SoundManagerScript.instance.PlaySound(jumperClip);
             hasJumped = true;
             hasLanded = false;
         }
@@ -70,6 +73,8 @@ public class JumperScript : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("Circle"))
         {
+            SoundManagerScript.instance.PlaySound(circleClip);
+
             CreateCircleEffect(other);
 
             orbit = other.gameObject.transform.GetChild(0);
