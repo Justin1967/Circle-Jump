@@ -19,4 +19,9 @@ public class SoundManagerScript : MonoBehaviour
     {
         effectsSource.PlayOneShot(clip);
     }
+
+    public void PlayMusic(AudioClip clip)
+    {
+        musicSource.PlayOneShot(clip);
+    }
 }
