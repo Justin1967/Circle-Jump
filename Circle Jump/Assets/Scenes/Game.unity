@@ -204,7 +204,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.15459237, g: 0.16051085, b: 0.16981131, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1056,17 +1056,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   circleColor:
-  - {r: 0.16078429, g: 0.9461992, b: 0.98039216, a: 1}
-  - {r: 1, g: 0, b: 0, a: 1}
-  - {r: 0.6875112, g: 1, b: 0, a: 1}
+  - {r: 0.53467464, g: 0.98039216, b: 0.16078429, a: 1}
+  - {r: 0.020833492, g: 0, b: 1, a: 1}
+  - {r: 1, g: 0.66404796, b: 0, a: 1}
   jumperColor:
-  - {r: 0, g: 0.013520718, b: 1, a: 1}
-  - {r: 0, g: 0.6777537, b: 1, a: 1}
-  - {r: 0.95129585, g: 0, b: 1, a: 1}
+  - {r: 1, g: 0, b: 0.01999569, a: 1}
+  - {r: 1, g: 0.89918447, b: 0, a: 1}
+  - {r: 0.4764151, g: 1, b: 0.47757953, a: 1}
   trailColor:
-  - {r: 0.97802067, g: 1, b: 0, a: 1}
-  - {r: 0.8980392, g: 0.7134588, b: 0, a: 1}
-  - {r: 0.8980392, g: 0, b: 0.26001596, a: 1}
+  - {r: 1, g: 0.90270585, b: 0, a: 1}
+  - {r: 0, g: 1, b: 0.6293886, a: 1}
+  - {r: 1, g: 0, b: 0.85647917, a: 1}
 --- !u!1 &1983156691
 GameObject:
   m_ObjectHideFlags: 0
