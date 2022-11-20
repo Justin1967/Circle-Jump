@@ -90,13 +90,13 @@ public class GameManagerScript : MonoBehaviour
         {
             GameObject circleExpand = (GameObject)Resources.Load("Single Expand");
             SpriteRenderer circleExpandSpriteRenderer = circleExpand.GetComponent<SpriteRenderer>();
-            circleExpandSpriteRenderer.color = ColorManagerScript.instance.circleColor[indexColor];
+            circleExpandSpriteRenderer.material.color = ColorManagerScript.instance.circleColor[indexColor];
         }
         else if (jumperScript.expandName == "Double Expand")
         {
             GameObject circleExpand = (GameObject)Resources.Load("Double Expand");
             SpriteRenderer circleExpandSpriteRenderer = circleExpand.GetComponent<SpriteRenderer>();
-            circleExpandSpriteRenderer.color = ColorManagerScript.instance.circleColor[indexColor];
+            circleExpandSpriteRenderer.material.color = ColorManagerScript.instance.circleColor[indexColor];
         }
     }
 
