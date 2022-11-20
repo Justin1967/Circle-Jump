@@ -69,7 +69,6 @@ public class JumperScript : MonoBehaviour
         if (other.gameObject.CompareTag("Bounds") && !hasLanded)
         {
             Destroy(gameObject);
-            //Wait 1 second then restart the game
         }
         else if (other.gameObject.CompareTag("Circle"))
         {
