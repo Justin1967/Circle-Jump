@@ -4,6 +4,8 @@ public class GameManagerScript : MonoBehaviour
 {
     public static GameManagerScript instance;
 
+    public AudioClip clickClip;
+
     private float circleY = -3.0f;
 
     private float circleMinimumX = -2.0f;
@@ -15,6 +17,10 @@ public class GameManagerScript : MonoBehaviour
     public int indexColor = 0;
 
     public bool levelUp = false;
+    private bool playGame = false;
+
+    [SerializeField]
+    private GameObject gameUI;
 
     [SerializeField]
     private GameObject circlePrefab;
@@ -32,16 +38,6 @@ public class GameManagerScript : MonoBehaviour
         {
             instance = this;
         }
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        jumperScript = jumperPrefab.GetComponent<JumperScript>();
-
-        float circleXPosition = Random.Range(circleMaximumX, circleMinimumX);
-        Instantiate(circlePrefab, new Vector3(circleXPosition, circleY, transform.position.z), Quaternion.identity);
-        Instantiate(jumperPrefab, new Vector3(circleXPosition, circleY, transform.position.z), Quaternion.identity);
     }
 
     private void Update()
@@ -103,5 +99,21 @@ public class GameManagerScript : MonoBehaviour
     public void GameOver()
     {
         //What should happen when player loses
+    }
+
+    public void OnButtonPlayPressed()
+    {
+        SoundManagerScript.instance.PlaySound(clickClip);
+
+        GameObject uiTitle = GameObject.Find("Title UI");
+        uiTitle.SetActive(false);
+
+        gameUI.SetActive(true);
+
+        jumperScript = jumperPrefab.GetComponent<JumperScript>();
+
+        float circleXPosition = Random.Range(circleMaximumX, circleMinimumX);
+        Instantiate(circlePrefab, new Vector3(circleXPosition, circleY, transform.position.z), Quaternion.identity);
+        Instantiate(jumperPrefab, new Vector3(circleXPosition, circleY, transform.position.z), Quaternion.identity);
     }
 }
