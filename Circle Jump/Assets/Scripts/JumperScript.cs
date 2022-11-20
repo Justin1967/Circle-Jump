@@ -8,7 +8,11 @@ public class JumperScript : MonoBehaviour
 
     private Transform orbitPosition;
 
+    private GameObject target;
+
     private float jumpSpeed = 20.0f;
+
+    private float targetY = 6.0f;
 
     private bool hasJumped = false;
 
@@ -25,6 +29,8 @@ public class JumperScript : MonoBehaviour
         jumperTrailRenderer.material.color = ColorManagerScript.instance.trailColor[GameManagerScript.instance.indexColor];
 
         circleScript = GameObject.FindGameObjectWithTag("Circle").GetComponent<CircleScript>();
+
+        target = GameObject.FindGameObjectWithTag("Target");
     }
 
     void Update()
@@ -66,9 +72,7 @@ public class JumperScript : MonoBehaviour
         {
             CreateCircleEffect(other);
 
-            //Get reference Orbit of the Circle
             orbit = other.gameObject.transform.GetChild(0);
-            //Get reference OrbitPosition of the Circle
             orbitPosition = orbit.transform.GetChild(0);
 
             hasJumped = false;
@@ -77,6 +81,10 @@ public class JumperScript : MonoBehaviour
             GameManagerScript.instance.score += 1;
             UIManagerScript.instance.scoreText.text = GameManagerScript.instance.score.ToString();
 
+            if (GameManagerScript.instance.score > 1)
+            {
+                target.transform.position = new Vector3(0, target.transform.position.y + targetY, 0);
+            }
 
             Vector3 direction = transform.position - orbit.position;
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
