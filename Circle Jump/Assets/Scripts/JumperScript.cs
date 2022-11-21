@@ -12,6 +12,8 @@ public class JumperScript : MonoBehaviour
 
     private GameObject target;
 
+    private GameObject currentCircle;
+
     private float jumpSpeed = 20.0f;
 
     private float targetY = 6.0f;
@@ -51,6 +53,9 @@ public class JumperScript : MonoBehaviour
     {
         if (hasJumped)
         {
+            Animator anim = currentCircle.GetComponent<Animator>();
+            anim.Play("implode");
+
             transform.Translate(jumpSpeed * Time.deltaTime * Vector2.up);
         }
 
@@ -64,11 +69,13 @@ public class JumperScript : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Bounds") && !hasLanded)
         {
-            Destroy(gameObject);
+            Destroy(other.gameObject);
         }
         else if (other.gameObject.CompareTag("Circle"))
         {
             SoundManagerScript.instance.PlaySound(circleClip);
+
+            currentCircle = other.gameObject;
 
             CreateCircleEffect(other);
 

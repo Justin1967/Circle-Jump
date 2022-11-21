@@ -14,7 +14,7 @@ public class CircleScript : MonoBehaviour
 
     public enum MODES { STATIC = 0, LIMITED = 1 }
 
-    public int myMode;
+    public MODES myMode;
 
     private int numberOfOrbits; //only for LIMITED circles
 
@@ -24,18 +24,20 @@ public class CircleScript : MonoBehaviour
 
     private float circleSize; //circle size between 0.7 and 1
 
+    public bool leftCircle;
+
     void Start()
     {
         var chooseMode = Random.Range(0, 2);
 
         if (chooseMode == 0)
         {
-            myMode = (int)MODES.STATIC;
+            myMode = MODES.STATIC;
             numberOfOrbitsText.text = " ";
         }
         else
         {
-            myMode = (int)MODES.LIMITED;
+            myMode = MODES.LIMITED;
             numberOfOrbits = Random.Range(2, 4);
             numberOfOrbitsText.text = numberOfOrbits.ToString();
         }
@@ -52,11 +54,8 @@ public class CircleScript : MonoBehaviour
         orbit.transform.Rotate(rotationDirection * rotationSpeed * Time.deltaTime * Vector3.forward);
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    void DestroyWhenAnimationFinished()
     {
-        if (other.gameObject.CompareTag("Bounds"))
-        {
-            Destroy(gameObject);
-        }
+        Destroy(gameObject);
     }
 }
