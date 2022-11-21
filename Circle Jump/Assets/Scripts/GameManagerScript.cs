@@ -9,16 +9,16 @@ public class GameManagerScript : MonoBehaviour
 
     private float circleY = -3.0f;
 
-    private float circleMinimumX = -2.0f;
-    private float circleMaximumX = 2.0f;
+    private float circleMinimumX = -1.8f;
+    private float circleMaximumX = 1.8f;
 
     public int score = 0;
-    private int best = 0;
+    //private int best = 0;
     public int level = 1;
     public int indexColor = 0;
 
     public bool levelUp = false;
-    private bool playGame = false;
+    //private bool playGame = false;
 
     [SerializeField]
     private GameObject gameUI;
