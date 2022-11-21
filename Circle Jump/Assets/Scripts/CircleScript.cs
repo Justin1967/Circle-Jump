@@ -40,7 +40,6 @@ public class CircleScript : MonoBehaviour
             numberOfOrbitsText.text = numberOfOrbits.ToString();
         }
 
-
         SpriteRenderer circleSpriteRenderer = GetComponent<SpriteRenderer>();
         circleSpriteRenderer.color = ColorManagerScript.instance.circleColor[GameManagerScript.instance.indexColor];
         circleSize = Random.Range(0.7f, 1.0f);
