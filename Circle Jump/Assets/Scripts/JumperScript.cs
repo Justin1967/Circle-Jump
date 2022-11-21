@@ -45,7 +45,6 @@ public class JumperScript : MonoBehaviour
         }
 
         JumperMovement();
-        RotateAroundCircle();
     }
 
     private void JumperMovement()
@@ -54,10 +53,7 @@ public class JumperScript : MonoBehaviour
         {
             transform.Translate(jumpSpeed * Time.deltaTime * Vector2.up);
         }
-    }
 
-    private void RotateAroundCircle()
-    {
         if (hasLanded)
         {
             transform.SetPositionAndRotation(orbitPosition.position, orbitPosition.rotation);
