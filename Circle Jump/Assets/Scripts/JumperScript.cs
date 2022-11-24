@@ -44,6 +44,10 @@ public class JumperScript : MonoBehaviour
             SoundManagerScript.instance.PlaySound(jumperClip);
             hasJumped = true;
             hasLanded = false;
+
+
+            Animator anim = currentCircle.GetComponent<Animator>();
+            anim.Play("implode");
         }
 
         JumperMovement();
@@ -53,9 +57,6 @@ public class JumperScript : MonoBehaviour
     {
         if (hasJumped)
         {
-            Animator anim = currentCircle.GetComponent<Animator>();
-            anim.Play("implode");
-
             transform.Translate(jumpSpeed * Time.deltaTime * Vector2.up);
         }
 
@@ -69,7 +70,7 @@ public class JumperScript : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Bounds") && !hasLanded)
         {
-            Destroy(other.gameObject);
+            Destroy(gameObject);
         }
         else if (other.gameObject.CompareTag("Circle"))
         {
