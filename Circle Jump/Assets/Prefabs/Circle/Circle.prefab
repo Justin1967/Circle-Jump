@@ -170,7 +170,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: -4800647816250845249}
   orbit: {fileID: 4455839706628572982}
+  orbitPosition: {fileID: 4455839704878160668}
+  circleClip: {fileID: 8300000, guid: 325453b468814994d8195f8eade674ca, type: 3}
   numberOfOrbitsText: {fileID: 5914390763137103178}
+  mode: 0
+  leftCircle: 0
 --- !u!1 &4455839706628572981
 GameObject:
   m_ObjectHideFlags: 0

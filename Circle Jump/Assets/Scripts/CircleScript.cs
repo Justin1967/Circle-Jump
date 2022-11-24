@@ -10,13 +10,22 @@ public class CircleScript : MonoBehaviour
     private Transform orbit;
 
     [SerializeField]
+    private Transform orbitPosition;
+
+    [SerializeField]
+    private AudioClip circleClip;
+
+    [SerializeField]
     private TextMeshPro numberOfOrbitsText;
+
+    private GameObject target = null;
 
     public enum MODES { STATIC = 0, LIMITED = 1 }
 
-    public MODES myMode;
+    public MODES mode = MODES.STATIC;
 
     private int numberOfOrbits; //only for LIMITED circles
+    private int currentOrbits = 0; //keeps track of completed orbits
 
     private float rotationSpeed = 200.0f; //orbit's rotation speed
 
@@ -26,18 +35,22 @@ public class CircleScript : MonoBehaviour
 
     public bool leftCircle;
 
+    private bool hasLanded = false;
+
+    public string expandName;
+
     void Start()
     {
         var chooseMode = Random.Range(0, 2);
 
         if (chooseMode == 0)
         {
-            myMode = MODES.STATIC;
+            mode = MODES.STATIC;
             numberOfOrbitsText.text = " ";
         }
         else
         {
-            myMode = MODES.LIMITED;
+            mode = MODES.LIMITED;
             numberOfOrbits = Random.Range(2, 4);
             numberOfOrbitsText.text = numberOfOrbits.ToString();
         }
@@ -51,7 +64,48 @@ public class CircleScript : MonoBehaviour
 
     void Update()
     {
+        if (hasLanded && target != null)
+        {
+            target.transform.SetPositionAndRotation(orbitPosition.position, orbitPosition.rotation);
+        }
+
         orbit.transform.Rotate(rotationDirection * rotationSpeed * Time.deltaTime * Vector3.forward);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Jumper"))
+        {
+            hasLanded = true;
+            target = other.gameObject;
+            SoundManagerScript.instance.PlaySound(circleClip);
+
+            Vector3 direction = target.transform.position - orbit.position;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
+            orbit.eulerAngles = Vector3.forward * angle;
+
+            CreateCircleEffect();
+        }
+    }
+
+    private void CreateCircleEffect()
+    {
+        SpriteRenderer circleSpriteRenderer = GetComponent<SpriteRenderer>();
+
+        if (circleSpriteRenderer.sprite.name == "Single")
+        {
+            expandName = "Single Expand";
+        }
+        else
+        {
+            expandName = "Double Expand";
+        }
+
+        GameObject circleExpand = (GameObject)Resources.Load(expandName);
+        SpriteRenderer circleExpandSpriteRenderer = circleExpand.GetComponent<SpriteRenderer>();
+        circleExpandSpriteRenderer.sharedMaterial.color = ColorManagerScript.instance.circleColor[GameManagerScript.instance.indexColor];
+
+        Instantiate(circleExpand, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
     }
 
     void DestroyWhenAnimationFinished()

@@ -4,44 +4,41 @@ public class GameManagerScript : MonoBehaviour
 {
     public static GameManagerScript instance;
 
+    //Script references 
+    private CircleScript circleScript;
+    private JumperScript jumperScript;
+
+    //GameObject references
+    [SerializeField]
+    private GameObject gameUI;
+    [SerializeField]
+    private GameObject settingsUI;
+    [SerializeField]
+    private GameObject titleUI;
+    [SerializeField] private GameObject audioOn, audioOff, musicOn, musicOff;
+    [SerializeField] private AudioSource soundSource, musicSource;
+    [SerializeField]
+    private GameObject circlePrefab;
+    [SerializeField]
+    private GameObject jumperPrefab;
+    private GameObject[] circles;
+
+    //Audio references
     public AudioClip clickClip;
     public AudioClip musicClip;
 
+    //Variables
     private float circleY = -3.0f;
-
     private float circleMinimumX = -1.8f;
     private float circleMaximumX = 1.8f;
 
     public int score = 0;
-    //private int best = 0;
+    private int best = 0;
     public int level = 1;
     public int indexColor = 0;
 
     public bool levelUp = false;
-    //private bool playGame = false;
-
-    [SerializeField]
-    private GameObject gameUI;
-
-    [SerializeField]
-    private GameObject settingsUI;
-
-    [SerializeField]
-    private GameObject titleUI;
-
-    [SerializeField] GameObject audioOn, audioOff, musicOn, musicOff;
-
-    [SerializeField] AudioSource soundSource, musicSource;
-
-    [SerializeField]
-    private GameObject circlePrefab;
-
-    [SerializeField]
-    private GameObject jumperPrefab;
-
-    private GameObject[] circles;
-
-    private JumperScript jumperScript;
+    private bool playGame = false;
 
     private void Awake()
     {
@@ -93,13 +90,15 @@ public class GameManagerScript : MonoBehaviour
 
     public void ChangeEffectColor()
     {
-        if (jumperScript.expandName == "Single Expand")
+        circleScript = GameObject.FindGameObjectWithTag("Circle").GetComponent<CircleScript>();
+
+        if (circleScript.expandName == "Single Expand")
         {
             GameObject circleExpand = (GameObject)Resources.Load("Single Expand");
             SpriteRenderer circleExpandSpriteRenderer = circleExpand.GetComponent<SpriteRenderer>();
             circleExpandSpriteRenderer.material.color = ColorManagerScript.instance.circleColor[indexColor];
         }
-        else if (jumperScript.expandName == "Double Expand")
+        else if (circleScript.expandName == "Double Expand")
         {
             GameObject circleExpand = (GameObject)Resources.Load("Double Expand");
             SpriteRenderer circleExpandSpriteRenderer = circleExpand.GetComponent<SpriteRenderer>();
