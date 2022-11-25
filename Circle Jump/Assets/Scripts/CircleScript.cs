@@ -35,7 +35,7 @@ public class CircleScript : MonoBehaviour
 
     public bool leftCircle;
 
-    private bool hasLanded = false;
+    public bool hasLanded = false;
 
     public string expandName;
 

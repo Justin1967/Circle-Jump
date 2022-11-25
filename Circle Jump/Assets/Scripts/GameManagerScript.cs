@@ -38,7 +38,7 @@ public class GameManagerScript : MonoBehaviour
     public int indexColor = 0;
 
     public bool levelUp = false;
-    private bool playGame = false;
+    public bool playGame = false;
 
     private void Awake()
     {

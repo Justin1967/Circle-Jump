@@ -1767,12 +1767,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 497c35f78f3cb0b48a48e46b312e46d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clickClip: {fileID: 8300000, guid: b2c0fa1b3dab81f428ebb4919b601d84, type: 3}
-  musicClip: {fileID: 8300000, guid: 0f9663731d7e4664789b3a01eaf54480, type: 3}
-  score: 0
-  level: 1
-  indexColor: 0
-  levelUp: 0
   gameUI: {fileID: 1461648486}
   settingsUI: {fileID: 1086125112}
   titleUI: {fileID: 1005413915}
@@ -1784,6 +1778,12 @@ MonoBehaviour:
   musicSource: {fileID: 349045274}
   circlePrefab: {fileID: 4455839705892523514, guid: 9e643972f78d80440a6c8fcdd11e96ca, type: 3}
   jumperPrefab: {fileID: 7546815468579449704, guid: 4654e7da3c2455647b84492c2f3bb163, type: 3}
+  clickClip: {fileID: 8300000, guid: b2c0fa1b3dab81f428ebb4919b601d84, type: 3}
+  musicClip: {fileID: 8300000, guid: 0f9663731d7e4664789b3a01eaf54480, type: 3}
+  score: 0
+  level: 1
+  indexColor: 0
+  levelUp: 0
 --- !u!1 &1623860257
 GameObject:
   m_ObjectHideFlags: 0
