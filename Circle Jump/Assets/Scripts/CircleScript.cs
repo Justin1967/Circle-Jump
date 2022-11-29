@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class CircleScript : MonoBehaviour
 {
+    private JumperScript jumperScript; //Reference to the JumperScript
+
     [SerializeField]
     private Animator anim;
 
@@ -64,7 +66,7 @@ public class CircleScript : MonoBehaviour
 
     void Update()
     {
-        if (hasLanded && target != null)
+        if (hasLanded)
         {
             target.transform.SetPositionAndRotation(orbitPosition.position, orbitPosition.rotation);
         }
@@ -76,8 +78,10 @@ public class CircleScript : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Jumper"))
         {
-            hasLanded = true;
             target = other.gameObject;
+            jumperScript = target.GetComponent<JumperScript>();
+            jumperScript.hasJumped = false;
+            hasLanded = true;
             SoundManagerScript.instance.PlaySound(circleClip);
 
             Vector3 direction = target.transform.position - orbit.position;
@@ -85,6 +89,8 @@ public class CircleScript : MonoBehaviour
             orbit.eulerAngles = Vector3.forward * angle;
 
             CreateCircleEffect();
+
+            GameManagerScript.instance.CreateNewCircle();
         }
     }
 

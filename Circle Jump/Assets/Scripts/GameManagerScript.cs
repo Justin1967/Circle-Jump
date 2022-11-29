@@ -32,7 +32,7 @@ public class GameManagerScript : MonoBehaviour
     private float circleMinimumX = -1.8f;
     private float circleMaximumX = 1.8f;
 
-    public int score = 0;
+    public int score = -1;
     private int best = 0;
     public int level = 1;
     public int indexColor = 0;

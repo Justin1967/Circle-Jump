@@ -16,7 +16,7 @@ public class JumperScript : MonoBehaviour
     private float jumpSpeed = 20.0f;
     private float cameraTargetY = 6.0f;
 
-    private bool hasJumped = false;
+    public bool hasJumped = false;
 
     void Start()
     {
@@ -33,14 +33,13 @@ public class JumperScript : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && circleScipt.hasLanded == true)
+        if (Input.GetKeyDown(KeyCode.Space) && !hasJumped)
         {
             SoundManagerScript.instance.PlaySound(jumperClip);
             GameManagerScript.instance.playGame = true;
             hasJumped = true;
             circleScipt.hasLanded = false;
         }
-
         JumperMovement();
     }
 
@@ -54,31 +53,25 @@ public class JumperScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Bounds"))
+        if (other.gameObject.CompareTag("Bounds") && hasJumped == true)
         {
             Destroy(gameObject);
         }
-
-        hasJumped = false;
 
         if (GameManagerScript.instance.playGame == true)
         {
             GameManagerScript.instance.score += 1;
             UIManagerScript.instance.scoreText.text = GameManagerScript.instance.score.ToString();
+
+            if (GameManagerScript.instance.score > 0)
+            {
+                cameraTarget.transform.position = new Vector3(0, cameraTarget.transform.position.y + cameraTargetY, 0);
+            }
+
+            if (GameManagerScript.instance.score % 11 == 0)
+            {
+                GameManagerScript.instance.levelUp = true;
+            }
         }
-
-        if (GameManagerScript.instance.score > 0)
-        {
-            cameraTarget.transform.position = new Vector3(0, cameraTarget.transform.position.y + cameraTargetY, 0);
-        }
-
-        //GameManagerScript.instance.CreateNewCircle();
-
-        if (GameManagerScript.instance.score % 11 == 0)
-        {
-            GameManagerScript.instance.levelUp = true;
-        }
-
-        GameManagerScript.instance.CreateNewCircle();
     }
 }
